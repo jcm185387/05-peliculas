@@ -5,3 +5,16 @@
     </ion-card>
   </ion-slide>
 </ion-slides> -->
+<!-- <swiper-container>
+  <swiper-slide >Slide 1</swiper-slide>
+  <swiper-slide>Slide 2</swiper-slide>
+  <swiper-slide>Slide 3</swiper-slide>
+  ...
+</swiper-container> -->
+
+<swiper-container slides-per-view="2" speed="2000" loop="true" css-mode="true">
+  <swiper-slide  *ngFor="let pelicula of peliculas">
+      <img  [src]="trustedUrl(pelicula.backdrop_path | imagen)" alt="">
+  </swiper-slide>
+
+</swiper-container>

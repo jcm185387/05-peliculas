@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../services/movies.service';
-import { Pelicula, RespuestaMDB } from '../interfaces/interfaces';
+import { Pelicula } from '../interfaces/interfaces';
+
+
+
+//END SWIPPER
 
 @Component({
   selector: 'app-tab1',
@@ -10,6 +14,7 @@ import { Pelicula, RespuestaMDB } from '../interfaces/interfaces';
 export class Tab1Page implements OnInit {
 
   peliculasRecientes: Pelicula[] = [];
+  populares: Pelicula []  = [];
   constructor(private moviesService: MoviesService ) {}
   
   ngOnInit() {
@@ -17,8 +22,16 @@ export class Tab1Page implements OnInit {
       subscribe( resp => {
           
           this.peliculasRecientes = resp.results;
-          console.log(this.peliculasRecientes);
+          //console.log(this.peliculasRecientes);
+          
+        }
+      );
+      this.moviesService.getPopulares().
+        subscribe(resp => {
+          this.populares =  resp.results;
         }
       );
   }
+
+  
 }
