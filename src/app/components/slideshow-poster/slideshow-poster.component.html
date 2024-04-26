@@ -9,7 +9,7 @@
   <swiper-slide *ngFor="let pelicula of peliculas">
     <ion-row>
       <ion-col size="12">
-        <ion-card>
+        <ion-card (click)="VerDetalle(pelicula.id)">
           <img   [src]="trustedUrl(pelicula.poster_path| imagen)" alt="">
         </ion-card>
       </ion-col>

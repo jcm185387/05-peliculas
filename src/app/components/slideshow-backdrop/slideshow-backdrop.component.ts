@@ -10,6 +10,8 @@ register();
 
 
 import {DomSanitizer} from '@angular/platform-browser';
+import { ModalController } from '@ionic/angular';
+import { DetalleComponent } from '../detalle/detalle.component';
 
 
 @Component({
@@ -20,7 +22,9 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class SlideshowBackdropComponent  implements OnInit {
 
   @Input() peliculas: Pelicula[] = [];
-  constructor(private sanitized: DomSanitizer) { }
+  constructor(private sanitized: DomSanitizer,
+              private modalCtrl: ModalController
+  ) { }
 
   ngOnInit() {}
 
@@ -28,4 +32,14 @@ export class SlideshowBackdropComponent  implements OnInit {
     return this.sanitized.bypassSecurityTrustUrl(unsafeUrl);
   }
 
+  async VerDetalle(id : number){
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps: {
+        id
+      }
+    });
+
+    modal.present();
+  }
 }

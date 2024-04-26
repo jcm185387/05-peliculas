@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ModalController } from '@ionic/angular';
 import { Pelicula } from 'src/app/interfaces/interfaces';
+import { DetalleComponent } from '../detalle/detalle.component';
 
 @Component({
   selector: 'app-slideshow-pares',
@@ -10,7 +12,9 @@ import { Pelicula } from 'src/app/interfaces/interfaces';
 export class SlideshowParesComponent  implements OnInit {
 
   @Input() peliculas: Pelicula[] = [];
-  constructor(private sanitized: DomSanitizer) { }
+  @Output() CargarMas = new EventEmitter();
+  constructor(private sanitized: DomSanitizer,
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {}
 
@@ -18,4 +22,19 @@ export class SlideshowParesComponent  implements OnInit {
     return this.sanitized.bypassSecurityTrustUrl(unsafeUrl);
   }
 
+  onClick(){
+    this.CargarMas.emit();
+  }
+
+  async VerDetalle(id : number){
+    console.log("clicj en  el pares");
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps: {
+        id
+      }
+    });
+
+    modal.present();
+  }
 }
