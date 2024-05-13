@@ -27,7 +27,6 @@ export class SlideshowParesComponent  implements OnInit {
   }
 
   async VerDetalle(id : number){
-    console.log("clicj en  el pares");
     const modal = await this.modalCtrl.create({
       component: DetalleComponent,
       componentProps: {

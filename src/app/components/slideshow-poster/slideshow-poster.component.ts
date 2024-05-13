@@ -12,6 +12,8 @@ import { DetalleComponent } from '../detalle/detalle.component';
 export class SlideshowPosterComponent  implements OnInit {
 
   @Input() peliculas: Pelicula[] = [];
+  message ="";
+  
   constructor(private sanitized: DomSanitizer,
               private modalCtrl: ModalController) { }
 
@@ -26,7 +28,6 @@ export class SlideshowPosterComponent  implements OnInit {
   }
 
   async VerDetalle(id : number){
-    console.log("clicj en  el pares");
     const modal = await this.modalCtrl.create({
       component: DetalleComponent,
       componentProps: {
@@ -35,6 +36,8 @@ export class SlideshowPosterComponent  implements OnInit {
     });
 
     modal.present();
+
+
   }
 
 }

@@ -8,7 +8,7 @@ export interface RespuestaMDB {
 export interface Pelicula {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: number[];
+  genre_ids?: number[];
   id: number;
   original_language: string;
   original_title: string;
@@ -30,6 +30,7 @@ export interface PeliculaDetalle {
   belongs_to_collection: null;
   budget: number;
   genres: Genre[];
+  //genre_ids: number[];
   homepage: string;
   id: number;
   imdb_id: string;
@@ -53,25 +54,25 @@ export interface PeliculaDetalle {
   vote_count: number;
 }
 
-interface Spokenlanguage {
+export interface Spokenlanguage {
   english_name: string;
   iso_639_1: string;
   name: string;
 }
 
-interface Productioncountry {
+export interface Productioncountry {
   iso_3166_1: string;
   name: string;
 }
 
-interface Productioncompany {
+export interface Productioncompany {
   id: number;
   logo_path: null | string;
   name: string;
   origin_country: string;
 }
 
-interface Genre {
+export interface Genre {
   id: number;
   name: string;
 }
@@ -110,4 +111,9 @@ export interface Cast {
   character: string;
   credit_id: string;
   order: number;
+}
+
+export interface favoritos {
+  genero: string,
+  pelis: PeliculaDetalle[]
 }

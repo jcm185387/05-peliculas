@@ -18,22 +18,28 @@ export class DetalleComponent  implements OnInit {
   //credits = {} as RespuestaCredits;
   actores : Cast[] = [];
   oculto = 150;
+  existepeli: boolean = false;
+
+  peliculas: PeliculaDetalle[] = [];
+  pelisFavs: PeliculaDetalle[] = [];
   constructor(private moviesService: MoviesService,
     private sanitized: DomSanitizer,
     private modalCtrl: ModalController,
-    private dataLocal: DataLocalService) { }
+    private dataLocal: DataLocalService
+     ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     
+    const existe = await this.dataLocal.existePelicula(this.id);
+    this.existepeli = existe;
+
     this.moviesService.getPeliculaDetalle(this.id).subscribe(
       resp => {
-        console.log(resp);
         this.pelicula = resp;
               
     });
     this.moviesService.getActoresPelicula(this.id).subscribe(
       resp => {
-        console.log(resp);
         this.actores = resp.cast;       
     });
   }
@@ -44,11 +50,21 @@ export class DetalleComponent  implements OnInit {
   }
   
   regresar(){
+    //this.confirm();   
     this.modalCtrl.dismiss();
   }
 
+  /*
+  async confirm() {
+    this.pelisFavs = await this.dataLocal.getPelisxGenero();
+    return this.modalCtrl.dismiss(this.pelisFavs, 'confirm');
+  } 
+  */
+  
+
   favorito(){
     this.dataLocal.guardarPelicula(this.pelicula);
+    this.existepeli = !this.existepeli;
     }
 
 

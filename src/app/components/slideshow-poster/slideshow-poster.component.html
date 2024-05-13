@@ -5,11 +5,11 @@
     </ion-card>
   </ion-slide>
 </ion-slides> -->
-<swiper-container slides-per-view="3" space-between="30"  speed="500" loop="true" css-mode="true">
-  <swiper-slide *ngFor="let pelicula of peliculas">
-    <ion-row>
+<swiper-container slides-per-view="3" space-between="30"  speed="2000" css-mode="true">
+  <swiper-slide  *ngFor="let pelicula of peliculas | filtroImagen">
+    <ion-row >
       <ion-col size="12">
-        <ion-card (click)="VerDetalle(pelicula.id)">
+        <ion-card   (click)="VerDetalle(pelicula.id)" >
           <img   [src]="trustedUrl(pelicula.poster_path| imagen)" alt="">
         </ion-card>
       </ion-col>
